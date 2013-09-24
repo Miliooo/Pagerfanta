@@ -27,6 +27,7 @@ use Pagerfanta\Exception\OutOfRangeCurrentPageException;
  */
 class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
 {
+
     private $adapter;
     private $allowOutOfRangePages;
     private $normalizeOutOfRangePages;
@@ -61,6 +62,8 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
      * Sets whether or not allow out of range pages.
      *
      * @param Boolean $value
+     *
+     * @return Pagerfanta
      */
     public function setAllowOutOfRangePages($value)
     {
@@ -83,6 +86,8 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
      * Sets whether or not normalize out of range pages.
      *
      * @param Boolean $value
+     *
+     * @return Pagerfanta
      */
     public function setNormalizeOutOfRangePages($value)
     {
@@ -119,6 +124,8 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
      *
      * @throws NotIntegerMaxPerPageException If the max per page is not an integer even converting.
      * @throws LessThan1MaxPerPageException  If the max per page is less than 1.
+     *
+     * @return Pagerfanta
      */
     public function setMaxPerPage($maxPerPage)
     {
@@ -173,6 +180,8 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
      * @throws NotIntegerCurrentPageException If the current page is not an integer even converting.
      * @throws LessThan1CurrentPageException  If the current page is less than 1.
      * @throws OutOfRangeCurrentPageException If It is not allowed out of range pages and they are not normalized.
+     *
+     * @return Pagerfanta
      */
     public function setCurrentPage($currentPage)
     {
@@ -245,7 +254,7 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
     private function notAllowedCurrentPageOutOfRange($currentPage)
     {
         return !$this->getAllowOutOfRangePages() &&
-               $this->currentPageOutOfRange($currentPage);
+            $this->currentPageOutOfRange($currentPage);
     }
 
     private function currentPageOutOfRange($currentPage)
@@ -317,8 +326,8 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
     public function getCurrentPageOffsetStart()
     {
         return $this->getNbResults() ?
-               $this->calculateOffsetForCurrentPageResults() + 1 :
-               0;
+            $this->calculateOffsetForCurrentPageResults() + 1 :
+            0;
     }
 
     /**
@@ -329,8 +338,8 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
     public function getCurrentPageOffsetEnd()
     {
         return $this->hasNextPage() ?
-               $this->getCurrentPage() * $this->getMaxPerPage() :
-               $this->getNbResults();
+            $this->getCurrentPage() * $this->getMaxPerPage() :
+            $this->getNbResults();
     }
 
     /**
@@ -443,7 +452,7 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
     /**
      * Implements the \Countable interface.
      *
-     * Return integer The number of results.
+     * @return integer The number of results.
      */
     public function count()
     {
@@ -453,7 +462,7 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
     /**
      * Implements the \IteratorAggregate interface.
      *
-     * Returns an \ArrayIterator instance with the current results.
+     * @return \ArrayIterator instance with the current results.
      */
     public function getIterator()
     {
@@ -483,4 +492,5 @@ class Pagerfanta implements \Countable, \IteratorAggregate, PagerfantaInterface
     {
         return (is_string($value) || is_float($value)) && (int) $value == $value;
     }
+
 }
