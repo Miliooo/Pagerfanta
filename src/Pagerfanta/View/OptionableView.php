@@ -22,14 +22,15 @@ use Pagerfanta\PagerfantaInterface;
  */
 class OptionableView implements ViewInterface
 {
+
     private $view;
     private $defaultOptions;
 
     /**
      * Constructor.
      *
-     * @param ViewInterface $view    A view.
-     * @param array         $options An array of default options.
+     * @param ViewInterface $view           A view.
+     * @param array         $defaultOptions An array of default options.
      */
     public function __construct(ViewInterface $view, array $defaultOptions)
     {
@@ -52,4 +53,5 @@ class OptionableView implements ViewInterface
     {
         return 'optionable';
     }
+
 }

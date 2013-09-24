@@ -11,7 +11,6 @@
 
 namespace Pagerfanta\View;
 
-use Pagerfanta\PagerfantaInterface;
 use Pagerfanta\Exception\InvalidArgumentException;
 
 /**
@@ -21,6 +20,7 @@ use Pagerfanta\Exception\InvalidArgumentException;
  */
 class ViewFactory implements ViewFactoryInterface
 {
+
     private $views;
 
     /**
@@ -96,4 +96,5 @@ class ViewFactory implements ViewFactoryInterface
     {
         $this->views = array();
     }
+
 }

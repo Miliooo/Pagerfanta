@@ -20,20 +20,23 @@ use Pagerfanta\View\Template\DefaultTemplate;
  */
 class DefaultView implements ViewInterface
 {
-    private $template;
 
+    private $template;
     private $pagerfanta;
     private $proximity;
-
     private $currentPage;
     private $nbPages;
-
     private $startPage;
     private $endPage;
 
+    /**
+     * Constructor.
+     *
+     * @param TemplateInterface $template An template instance
+     */
     public function __construct(TemplateInterface $template = null)
     {
-        $this->template = $template ?: $this->createDefaultTemplate();
+        $this->template = $template ? : $this->createDefaultTemplate();
     }
 
     protected function createDefaultTemplate()
@@ -65,8 +68,8 @@ class DefaultView implements ViewInterface
     private function initializeOptions($options)
     {
         $this->proximity = isset($options['proximity']) ?
-                           (int) $options['proximity'] :
-                           $this->getDefaultProximity();
+            (int) $options['proximity'] :
+            $this->getDefaultProximity();
     }
 
     protected function getDefaultProximity()
@@ -96,15 +99,15 @@ class DefaultView implements ViewInterface
     {
         $this->calculateStartAndEndPage();
 
-        return $this->previous().
-               $this->first().
-               $this->secondIfStartIs3().
-               $this->dotsIfStartIsOver3().
-               $this->pages().
-               $this->dotsIfEndIsUnder3ToLast().
-               $this->secondToLastIfEndIs3ToLast().
-               $this->last().
-               $this->next();
+        return $this->previous() .
+            $this->first() .
+            $this->secondIfStartIs3() .
+            $this->dotsIfStartIsOver3() .
+            $this->pages() .
+            $this->dotsIfEndIsUnder3ToLast() .
+            $this->secondToLastIfEndIs3ToLast() .
+            $this->last() .
+            $this->next();
     }
 
     private function calculateStartAndEndPage()
@@ -237,6 +240,7 @@ class DefaultView implements ViewInterface
     {
         return 'default';
     }
+
 }
 
 /*
